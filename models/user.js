@@ -1,12 +1,12 @@
 const { required } = require('joi')
 const mongoose =require('mongoose')
 
-const UserSchema = new Schema({
+const UserSchema = new mongoose.Schema({
     name:{
         type:String,
         required:[true,'please provide name'],
         minLength:3,
-        maxLength:2
+        maxLength:15
     },
     email:{
         type:String,
