@@ -3,12 +3,12 @@ const {statusCode}=require('http-status-code')
 const bcrypt = require('bcryptjs');
 
 const login=async(req,res)=>{
-     const {name,email,password}=req.body
-     const salt=await bcrypt.genSaltSync(10);
-     const hashedPassword=bcrypt.hashSync(password, salt);
+    //  const {name,email,password}=req.body
+    //  const salt=await bcrypt.genSaltSync(10);
+    //  const hashedPassword=bcrypt.hashSync(password, salt);
 
-     const securedData= {name,email,password:hashedPassword}
-    const user=await User.create({...securedData})
+    //  const securedData= {name,email,password:hashedPassword}
+    const user=await User.create({...req.body})
     res.json({user})
 
 }
