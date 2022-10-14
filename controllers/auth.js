@@ -1,20 +1,22 @@
 const User=require('../models/user')
-const {statusCode}=require('http-status-code')
-const bcrypt = require('bcryptjs');
+const {StatusCodes}=require('http-status-code')
+const jwt = require('jsonwebtoken');
 
-const login=async(req,res)=>{
-    //  const {name,email,password}=req.body
+const register=async(req,res)=>{
+      const {name,email,password}=req.body
     //  const salt=await bcrypt.genSaltSync(10);
     //  const hashedPassword=bcrypt.hashSync(password, salt);
 
     //  const securedData= {name,email,password:hashedPassword}
     const user=await User.create({...req.body})
-    res.json({user})
-
+    const token=await jwt.sign({UserId: user._id,name:user.name},"jwtsecret",{ expiresIn:"24h"});
+    res.json({name:user.name,token})
+}
+const login=async(req,res)=>{
+  
+    res.send('this is login auth')
 }
 
-const register=async(req,res)=>{
-    res.send('this is register auth')
-}
+
 
 module.exports={login,register}
