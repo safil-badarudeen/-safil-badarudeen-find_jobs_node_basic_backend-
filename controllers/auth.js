@@ -1,7 +1,8 @@
 const User=require('../models/user')
 const {StatusCodes}=require('http-status-code')
 const jwt = require('jsonwebtoken');
-
+const {BadRequestError}=require('../errors')
+const {UnauthenticatedError}=require('../errors')
 
 const register=async(req,res)=>{
       const {name,email,password}=req.body
@@ -15,7 +16,21 @@ const register=async(req,res)=>{
 }
 const login=async(req,res)=>{
   
-    res.send('this is login auth')
+    const {email,password}=req.body;
+
+    if(!email || !password){
+        throw new BadRequestError('Please provide email and Password')
+    }
+    //compare passoword
+
+    const user=await User.findOne({email})
+
+    if (!user){
+        throw new UnauthenticatedError('User with entered email not found')
+    }
+
+    const token=user.getToken();
+    res.status(200).json({name: user.name,token})
 }
 
 
