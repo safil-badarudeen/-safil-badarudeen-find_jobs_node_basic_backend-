@@ -33,6 +33,6 @@ UserSchema.pre('save',async function(next){
 })
 
 UserSchema.methods.getToken=function(){
-    return jwt.sign({UserId: this._id,name:this.name},"jwtsecret",{ expiresIn:"30d"})
+    return jwt.sign({UserId: this._id,name:this.name},process.env.JWT_KEY,{ expiresIn:process.env.JWT_LIFETIME})
 }
 module.exports=mongoose.model('User',UserSchema)

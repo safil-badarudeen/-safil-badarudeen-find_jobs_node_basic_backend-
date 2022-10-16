@@ -1,6 +1,8 @@
 const User=require('../models/user')
 const {StatusCodes}=require('http-status-code')
 const jwt = require('jsonwebtoken');
+
+
 const register=async(req,res)=>{
       const {name,email,password}=req.body
     //  const salt=await bcrypt.genSaltSync(10);
