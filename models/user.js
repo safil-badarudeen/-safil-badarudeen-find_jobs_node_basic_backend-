@@ -35,4 +35,9 @@ UserSchema.pre('save',async function(next){
 UserSchema.methods.getToken=function(){
     return jwt.sign({UserId: this._id,name:this.name},process.env.JWT_KEY,{ expiresIn:process.env.JWT_LIFETIME})
 }
+
+UserSchema.methods.comparePassword=async function(enteredPassword){
+ const isMatch= await bcrypt.compare(enteredPassword,this.password)
+ return isMatch
+}
 module.exports=mongoose.model('User',UserSchema)

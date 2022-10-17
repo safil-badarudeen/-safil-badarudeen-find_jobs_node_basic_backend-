@@ -27,6 +27,11 @@ const login=async(req,res)=>{
 
     if (!user){
         throw new UnauthenticatedError('User with entered email not found')
+    }   
+     
+    const passwordAuth=await user.comparePassword(password)
+    if(!passwordAuth){
+        throw new UnauthenticatedError('Password isnt  correct Try again')
     }
 
     const token=user.getToken();
