@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const jobSchema=new mongoose.Schema({
-    job:{
+    company:{
         type:String,
         require:[true,'please provide job title'],
         maxlength:50,
@@ -24,4 +24,4 @@ const jobSchema=new mongoose.Schema({
     }
 },{timestamps:true});
 
-module.exports=mongoose.model('job',jobSchema)
+module.exports=mongoose.model('Job',jobSchema)
