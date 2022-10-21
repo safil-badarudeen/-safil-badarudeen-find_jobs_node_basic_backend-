@@ -14,7 +14,7 @@ const authUserMiddleware=async(req,res,next)=>{
     try {
         const verifiedToken=jwt.verify(token,process.env.JWT_KEY)
         //attaching this to user routes.using middle ware passing .get job aa routil okke ith availabale avum
-        req.user={userid:verifiedToken.UserId,name:verifiedToken.name}
+        req.user={userId:verifiedToken.UserId,name:verifiedToken.name}
         next()
     } catch (error) {
         throw new UnauthenticatedError("user token cant be verified")
