@@ -42,7 +42,7 @@ const updateJob =async(req,res)=>{
         req.body,
         {new:true, runValidators:true})
         if(!job){
-            throw new NotFoundError('Job doesnt exist')
+            throw new NotFoundError(`Job doesnt exist ${jobId}`)
         }
         res.status(StatusCodes.OK).json({job})
 
@@ -50,7 +50,15 @@ const updateJob =async(req,res)=>{
 }
 
 const deleteJob=async(req,res)=>{
-    res.send('get jobs controller')
+    const {id:jobId}=req.params
+   const job=await Job.findByIdAndRemove({_id:jobId})
+   if(!job){
+     throw new NotFoundError(`NO job Exist on  ${jobId} this job id`)
+   }
+
+
+
+    res.status(StatusCodes.OK).send({})
 }
 
 
