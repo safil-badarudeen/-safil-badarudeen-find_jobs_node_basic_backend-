@@ -33,7 +33,7 @@ UserSchema.pre('save',async function(next){
 })
 
 UserSchema.methods.getToken=function(){
-    console.log(this._id)
+    // console.log(this._id)
     return jwt.sign({UserId: this._id,name:this.name},process.env.JWT_KEY,{ expiresIn:process.env.JWT_LIFETIME})
    
 }

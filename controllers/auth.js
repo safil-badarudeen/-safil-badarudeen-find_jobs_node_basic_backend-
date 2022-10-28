@@ -1,5 +1,5 @@
 const User=require('../models/user')
-const {StatusCodes}=require('http-status-code')
+const {StatusCodes}=require('http-status-codes')
 const jwt = require('jsonwebtoken');
 const {BadRequestError}=require('../errors')
 const {UnauthenticatedError}=require('../errors')
@@ -35,7 +35,7 @@ const login=async(req,res)=>{
     }
 
     const token=user.getToken();
-    res.status(200).json({name: user.name,token})
+    res.status(StatusCodes.ACCEPTED).json({name: user.name,token})
 }
 
 
