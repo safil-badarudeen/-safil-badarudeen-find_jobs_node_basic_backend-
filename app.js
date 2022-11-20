@@ -5,7 +5,7 @@ require('express-async-errors');
 const cors = require('cors')
 const helmet = require('helmet')
 const xss = require ('xss-clean')
-const rateLimit = require( ' express-rate-limit')
+const rateLimit = require('express-rate-limit')
 
 const express = require('express');
 const app = express();
@@ -44,7 +44,7 @@ app.use('/api/v1/jobs',authUserMiddleware,jobsRoutes)
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 const start = async () => {
   try {
